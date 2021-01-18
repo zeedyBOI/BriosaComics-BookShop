@@ -1,0 +1,50 @@
+<div class="main-content container" style="margin-top: 100px">
+  <div class="row text-center" *ngIf="orders.length === 0">
+    <h2>Não tem encomendas</h2>
+  </div>
+  <div class="row" *ngIf="orders.length > 0">
+    <div class="col-md-12">
+      <!-- TABLE NO PADDING -->
+      <div class="panel">
+        <div class="panel-heading" style="padding-bottom: 0">
+          <h1 class="panel-title" style="font-size: large">Encomendas</h1>
+        </div>
+        <div class="panel-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Produtos</th>
+                <th>Data de Encomenda</th>
+                <th>Data de Envio</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of orders">
+                <td *ngFor="let item of order.items">
+                  {{ item.book.title }} ({{ item.quantity }})
+                </td>
+                <td>{{ order.date }}</td>
+                <td>{{ order.dispatchDate }}</td>
+                <td
+                  style="color: red; font-weight: bold; font-size: small"
+                  *ngIf="!order.dispatchDate"
+                >
+                  Não enviado
+                </td>
+                <td
+                  class="text-success"
+                  style="font-weight: bold; font-size: small"
+                  *ngIf="order.dispatchDate"
+                >
+                  Enviado
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- END TABLE NO PADDING -->
+    </div>
+  </div>
+</div>

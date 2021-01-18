@@ -1,0 +1,223 @@
+<div class="main-content container" style="margin-top: 100px">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- TABLE NO PADDING -->
+      <div class="panel">
+        <div class="panel-heading" style="padding-bottom: 0">
+          <h1 class="panel-title" style="font-size: large">Livros</h1>
+        </div>
+        <div class="col-md-12" style="padding-right: 30px">
+          <button
+            class="btn btn-blue"
+            style="float: right; font-size: 1.1em"
+            data-toggle="modal"
+            data-target="#addBookModal"
+          >
+            <i class="fa fa-plus"></i>Adicionar Livro
+          </button>
+        </div>
+        <div class="panel-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Imagem</th>
+                <th>Nome</th>
+                <th>Autor</th>
+                <th>ISBN</th>
+                <th>Edição</th>
+                <th>Editor</th>
+                <th>Preço</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let book of books">
+                <td class="col-md-1 no-padding">
+                  <div class="col-md-12 no-padding" style="margin-top: 13px">
+                    <img [src]="book.image" style="width: 100%" />
+                  </div>
+                </td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.edition }}</td>
+                <td>{{ book.publisher }}</td>
+                <td>
+                  {{ book.price }}
+                  
+                </td>
+                <td>
+                  <button
+                      class="btn btn-red"
+                      style="margin-left: 10px"
+                      (click)="deleteBook(book.isbn, book.image)"
+                    >
+                      <i class="fa fa-trash"></i>Eliminar
+                    </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- END TABLE NO PADDING -->
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="addBookModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="modalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modalLabel">Novo Livro</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addBookForm">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Título*"
+            style="margin-bottom: 10px"
+            formControlName="title"
+          />
+          <small
+            class="form-text text-left"
+            style="margin-bottom: 10px"
+            *ngIf="submitted && form.title.errors"
+            >Campo Título é de preenchimento obrigatório.</small
+          >
+          <small
+            class="form-text text-left"
+            style="margin-bottom: 10px"
+            *ngIf="titleAndEditionAlreadyExists"
+            >Já existe um livro com este Título e esta Edição.</small
+          >
+
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Autor*"
+            style="margin-bottom: 10px"
+            formControlName="author"
+          />
+          <small
+            class="form-text text-left"
+            style="margin-bottom: 10px"
+            *ngIf="submitted && form.author.errors"
+            >Campo Autor é de preenchimento obrigatório.</small
+          >
+
+          <input
+            type="text"
+            class="form-control"
+            placeholder="ISBN*"
+            style="margin-bottom: 10px"
+            formControlName="isbn"
+          />
+          <small
+            class="form-text text-left"
+            style="margin-bottom: 10px"
+            *ngIf="submitted && form.isbn.errors"
+            >Campo ISBN é de preenchimento obrigatório.</small
+          >
+          <small
+            class="form-text text-left"
+            style="margin-bottom: 10px"
+            *ngIf="isbnAlreadyExists"
+            >Já existe um livro com este ISBN.</small
+          >
+
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Edição*"
+            style="margin-bottom: 10px"
+            formControlName="edition"
+          />
+          <small
+            class="form-text text-left"
+            style="margin-bottom: 10px"
+            *ngIf="submitted && form.edition.errors"
+            >Campo Edição é de preenchimento obrigatório.</small
+          >
+          <small
+            class="form-text text-left"
+            style="margin-bottom: 10px"
+            *ngIf="titleAndEditionAlreadyExists"
+            >Já existe um livro com este Título e esta Edição.</small
+          >
+
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Editor*"
+            style="margin-bottom: 10px"
+            formControlName="publisher"
+          />
+          <small
+            class="form-text text-left"
+            style="margin-bottom: 10px"
+            *ngIf="submitted && form.publisher.errors"
+            >Campo Editor é de preenchimento obrigatório.</small
+          >
+
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Preço*"
+            style="margin-bottom: 10px"
+            formControlName="price"
+          />
+          <small
+            class="form-text text-left"
+            style="margin-bottom: 10px"
+            *ngIf="submitted && form.price.errors"
+            >Campo Preço é de preenchimento obrigatório.</small
+          >
+
+          <label>Imagem*</label>
+          <input
+            type="file"
+            formControlName="image"
+            (change)="onFileSelected($event)"
+          />
+          <small
+            class="form-text text-left"
+            *ngIf="submitted && form.image.errors"
+            >Campo Imagem é de preenchimento obrigatório.</small
+          >
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-green" type="submit" (click)="onSubmit()">
+          Confirmar
+        </button>
+        <button class="btn btn-red" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  #notiflix
+  style="display: none"
+  onClick="(function(){
+            Notiflix.Notify.Init({cssAnimationStyle: 'from-right'});
+            Notiflix.Notify.Success('Livro adicionado com sucesso!');
+          })();"
+></div>
+<div
+  #notiflixDeleted
+  style="display: none"
+  onClick="(function(){
+            Notiflix.Notify.Init({cssAnimationStyle: 'from-right'});
+            Notiflix.Notify.Success('Livro eliminado com sucesso!');
+          })();"
+></div>

@@ -1,0 +1,113 @@
+<div class="main-content container" style="margin-top: 100px">
+  <div class="container-fluid">
+    <div class="container no-padding">
+      <ul class="book-title" id="breadcrumb" style="padding-left: 0">
+        <li><a class="current disabled" href="#">Checkout</a></li>
+        <li><a class="disabled" href="#">Dados da Encomenda</a></li>
+      </ul>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <!-- BASIC TABLE -->
+        <div class="panel">
+          <div class="panel-body no-padding">
+            <table class="table">
+              <thead class="book-title" style="font-size: 1.5em; color: black">
+                <tr
+                  style="background-color: #f9f9f9; text-transform: uppercase"
+                >
+                  <th class="text-center">Produto</th>
+                  <th class="text-center">Quantidade</th>
+                  <th class="text-center">Preço</th>
+                </tr>
+              </thead>
+              <tbody style="color: black">
+                <tr *ngFor="let item of cart.items">
+                  <td class="col-md-5 no-padding">
+                    <div class="col-md-4" style="margin: 25px 15px">
+                      <img class="img-responsive" [src]="item.book.image" />
+                    </div>
+                    <div class="col-md-2" style="margin-top: 10%">
+                      <h2 class="book-title">{{ item.book.title }}</h2>
+                      <button
+                        class="btn btn-red"
+                        style="font-size: 1em; margin-top: 10px"
+                        (click)="removeItemFromCart(item)"
+                      >
+                        <span
+                          class="lnr lnr-trash"
+                          style="margin-left: 0; margin-right: 10px"
+                        ></span
+                        >ELIMINAR
+                      </button>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <div
+                      class="col-md-12"
+                      style="margin-top: 20%; font-size: 2.3em"
+                    >
+                      <button
+                        class="btn btn-default"
+                        (click)="decrementItemQuantity(item)"
+                      >
+                        <i class="fa fa-minus"></i>
+                      </button>
+                      <h3 style="margin: 0 10px; display: inline">
+                        {{ item.quantity }}
+                      </h3>
+                      <button
+                        class="btn btn-default"
+                        (click)="incrementItemQuantity(item)"
+                      >
+                        <i class="fa fa-plus"></i>
+                      </button>
+                    </div>
+                  </td>
+
+                  <td class="text-center">
+                    <div class="col-md-12" style="margin-top: 26%">
+                      <h2>{{ item.book.price }}€</h2>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div
+            class="panel-footer text-right book-title"
+            style="padding-top: 0; font-weight: bold; color: black"
+          >
+            <h2>
+              Total:<span style="margin-left: 30px; font-weight: bolder"
+                >{{ cart.total }}€</span
+              >
+            </h2>
+          </div>
+          <div
+            class="row"
+            style="margin-bottom: 15px; margin-left: 10px; margin-right: 10px"
+          >
+            <div class="col-md-6 text-left">
+              <button class="btn btn-red btn-lg" [routerLink]="['/']">
+                CANCELAR
+              </button>
+            </div>
+            <div class="col-md-6 text-right">
+              <button
+                class="btn btn-green btn-lg"
+                [routerLink]="['/order-details']"
+              >
+                CONTINUAR<i
+                  class="fa fa-arrow-right"
+                  style="margin-left: 15px; margin-right: 0"
+                ></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- END BASIC TABLE -->
+      </div>
+    </div>
+  </div>
+</div>

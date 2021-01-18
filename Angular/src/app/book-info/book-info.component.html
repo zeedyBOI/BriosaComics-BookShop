@@ -1,0 +1,40 @@
+<div class="main-content container" style="margin-top: 100px">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-3" style="padding: 10px">
+          <img class="book-img" [src]="book.image" />
+        </div>
+        <div class="col-md-9" style="padding-left: 50px">
+          <h1 class="book-title" style="color: black">{{ book.title }}</h1>
+          <h3 class="book-title" style="margin-top: 0">de {{ book.author }}</h3>
+          <div class="book-info">
+            <h4>
+              ISBN: <span>{{ book.isbn }}</span>
+            </h4>
+            <h4>
+              Edição: <span>{{ book.edition }}</span>
+            </h4>
+            <h4>
+              Editor: <span>{{ book.publisher }}</span>
+            </h4>
+            <h2>
+              Preço:
+              <span style="font-weight: bold; color: black"
+                >{{ book.price }}€</span
+              >
+            </h2>
+            <button
+              class="btn btn-lg btn-green"
+              style="margin-top: 20px"
+              (click)="addBookToCart()"
+            >
+              <i class="fa fa-shopping-cart" style="margin-right: 10px"></i
+              >COMPRAR
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

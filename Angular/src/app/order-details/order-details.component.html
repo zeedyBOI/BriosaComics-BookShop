@@ -1,0 +1,55 @@
+<div class="main-content container" style="margin-top: 100px">
+  <div class="container-fluid">
+    <div class="container no-padding">
+      <ul class="book-title" id="breadcrumb" style="padding-left: 0">
+        <li><a href="#" [routerLink]="['/checkout']">Checkout</a></li>
+        <li><a class="current disabled" href="#">Dados de Envio</a></li>
+      </ul>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <!-- BASIC TABLE -->
+        <div class="panel">
+          <div class="panel-heading book-title text-center">
+            <h2 style="color: black; font-weight: bold">
+              Verifique os Dados de Envio
+            </h2>
+          </div>
+          <div class="panel-body no-padding text-center" style="color: black">
+            <div
+              class="col-xs-12"
+              style="background-color: #f2f2f2; margin-bottom: 10px"
+            >
+              <h3 style="margin-top: 10px">{{ user.name }}</h3>
+            </div>
+            <div class="row text-center">
+              <h3>{{ user.address }}</h3>
+            </div>
+            <div class="row text-center">
+              <h3>{{ user.postalCode }}</h3>
+            </div>
+            <div class="row text-center">
+              <h3>{{ user.phoneNumber }}</h3>
+            </div>
+          </div>
+          <div
+            class="row"
+            style="margin-bottom: 15px; margin-left: 10px; margin-right: 10px"
+          >
+            <div class="col-md-6 text-left">
+              <button class="btn btn-red btn-lg" [routerLink]="['/']">
+                CANCELAR
+              </button>
+            </div>
+            <div class="col-md-6 text-right">
+              <button class="btn btn-green btn-lg" (click)="makeOrder()">
+                CONFIRMAR ENCOMENDA
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- END BASIC TABLE -->
+      </div>
+    </div>
+  </div>
+</div>

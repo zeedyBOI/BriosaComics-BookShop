@@ -1,0 +1,63 @@
+<div class="vertical-align-wrap">
+  <div class="vertical-align-middle">
+    <div class="auth-box">
+      <div class="left">
+        <div class="content">
+          <div class="header">
+            <div class="logo text-center">
+              <img
+                src="../../assets/img/logo-dark.png"
+                alt="BriosaComics Logo"
+              />
+            </div>
+          </div>
+          <form
+            class="form-auth-small"
+            [formGroup]="loginForm"
+            (ngSubmit)="onSubmit()"
+          >
+            <div class="form-group">
+              <label for="signin-email" class="control-label sr-only"
+                >Email</label
+              >
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Email"
+                formControlName="email"
+              />
+            </div>
+            <div class="form-group">
+              <label for="signin-password" class="control-label sr-only"
+                >Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Password"
+                formControlName="password"
+              />
+              <small
+                class="form-text text-center"
+                style="font-size: 1.5rem; font-weight: bold; padding-top: 10px;"
+                *ngIf="wrongCredentials"
+                >Email ou Password incorreta</small
+              >
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">
+              ENTRAR
+            </button>
+            <div class="bottom">
+              <a [routerLink]="['/sign-up']" style="cursor: pointer"
+                >Não tem conta? Crie uma aqui!</a
+              >
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="right">
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>

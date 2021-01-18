@@ -1,0 +1,6 @@
+app:
+  datasource:
+    jdbc-url: jdbc:postgresql://localhost:5432/briosacomics
+    username: kiidkuddy
+    password: The%Three%Pain%3@
+    pool-size: 30

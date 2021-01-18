@@ -1,0 +1,36 @@
+<div class="main-content container" style="margin-top: 100px">
+  <div class="row">
+    <div class="col-sm-6 col-md-3" *ngFor="let book of books">
+      <div class="thumbnail" style="padding: 0">
+        <div class="caption text-center" style="padding: 0">
+          <img class="book-img" [src]="book.image" />
+          <h2
+            class="book-title"
+            style="margin-top: 10px; margin-bottom: 10px"
+            [routerLink]="['/book-info', book.isbn]"
+          >
+            {{ book.title }}
+          </h2>
+          <p class="book-title">{{ book.publisher }}</p>
+          <h3 class="book-title">{{ book.price }}€</h3>
+          <button
+            class="btn btn-primary"
+            style="margin-bottom: 10px"
+            (click)="addBookToCart(book)"
+          >
+            <i class="fa fa-shopping-cart"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  #notiflix
+  style="display: none"
+  onClick="(function(){
+            Notiflix.Notify.Init({cssAnimationStyle: 'from-right'});
+            Notiflix.Notify.Success('Encomenda feita com sucesso!');
+          })();"
+></div>

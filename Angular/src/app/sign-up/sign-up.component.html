@@ -1,0 +1,134 @@
+<div class="vertical-align-wrap">
+  <div class="vertical-align-middle">
+    <div
+      class="auth-box lockscreen clearfix"
+      style="height: 85%; margin-top: 100px; margin-bottom: 15px"
+    >
+      <div class="content">
+        <h1 class="sr-only">Klorofil - Free Bootstrap dashboard</h1>
+        <div class="logo text-center">
+          <img src="../../assets/img/logo-dark.png" alt="BriosaComics Logo" />
+        </div>
+        <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Nome*"
+              formControlName="name"
+            />
+            <small
+              class="form-text text-left"
+              *ngIf="submitted && form.name.errors"
+              >Campo 'Nome' é de preenchimento obrigatório.</small
+            >
+          </div>
+          <div class="form-group">
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Email*"
+              formControlName="email"
+            />
+            <small
+              class="form-text text-left"
+              *ngIf="submitted && form.password.errors?.required"
+              >Campo 'Email' é de preenchimento obrigatório.</small
+            >
+            <small
+              class="form-text text-left"
+              *ngIf="submitted && form.email.errors?.email"
+              >Email inválido.</small
+            >
+            <small class="form-text text-left" *ngIf="submitted && emailExists"
+              >O Email já foi utilizado.</small
+            >
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Password*"
+              formControlName="password"
+            />
+            <small
+              class="form-text text-left"
+              *ngIf="submitted && form.password.errors?.required"
+              >Campo 'Password' é de preenchimento obrigatório.</small
+            >
+            <small
+              class="form-text text-left"
+              *ngIf="submitted && form.password.errors?.minlength"
+              >A Password deve ter no mínimo 8 caracteres.</small
+            >
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Morada*"
+              formControlName="address"
+            />
+            <small
+              class="form-text text-left"
+              *ngIf="submitted && form.address.errors"
+              >Campo 'Morada' é de preenchimento obrigatório.</small
+            >
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Código Postal*"
+              formControlName="postalCode"
+            />
+            <small
+              class="form-text text-left"
+              *ngIf="submitted && form.postalCode.errors?.required"
+              >Campo 'Código Postal' é de preenchimento obrigatório.</small
+            >
+            <small
+              class="form-text text-left"
+              *ngIf="submitted && form.postalCode.errors?.pattern"
+              >Código Postal inválido.</small
+            >
+          </div>
+          <div class="form-group" style="margin-bottom: 25px">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Telefone*"
+              formControlName="phoneNumber"
+            />
+            <small
+              class="form-text text-left"
+              *ngIf="submitted && form.phoneNumber.errors?.required"
+              >Campo 'Telefone' é de preenchimento obrigatório.</small
+            >
+            <small
+              class="form-text text-left"
+              *ngIf="
+                submitted &&
+                (form.phoneNumber.errors?.minlength ||
+                  form.phoneNumber.errors?.maxlength)
+              "
+              >Telefone inválido.</small
+            >
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block">
+            REGISTAR
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  #notiflix
+  style="display: none"
+  onClick="(function(){
+            Notiflix.Notify.Init({cssAnimationStyle: 'from-right'});
+            Notiflix.Notify.Success('Conta criada com sucesso!');
+          })();"
+></div>

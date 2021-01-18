@@ -1,0 +1,68 @@
+<div class="main-content container" style="margin-top: 100px">
+  <div class="row text-center" *ngIf="orders.length === 0">
+    <h2>Não existem encomendas</h2>
+  </div>
+  <div class="row" *ngIf="orders.length > 0">
+    <div class="col-md-12">
+      <!-- TABLE NO PADDING -->
+      <div class="panel">
+        <div class="panel-heading">
+          <h1 class="panel-title" style="font-size: large">Encomendas</h1>
+        </div>
+        <div class="panel-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Produtos</th>
+                <th>Cliente</th>
+                <th>Dados de Envio</th>
+                <th>Data de Encomenda</th>
+                <th>Data de Envio</th>
+                <th>Estado</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of orders">
+                <td *ngFor="let item of order.items">
+                  {{ item.book.title }} ({{ item.quantity }})
+                </td>
+                <td>{{ order.client }}</td>
+                <td>
+                  {{ order.shippingData.address }}<br />
+                  {{ order.shippingData.postalCode }}<br />
+                  {{ order.shippingData.phoneNumber }}<br />
+                </td>
+                <td>{{ order.date }}</td>
+                <td>{{ order.dispatchDate }}</td>
+                <td
+                  style="color: red; font-weight: bold; font-size: small"
+                  *ngIf="!order.dispatchDate"
+                >
+                  Por enviar
+                </td>
+                <td
+                  class="text-success"
+                  style="font-weight: bold; font-size: small"
+                  *ngIf="order.dispatchDate"
+                >
+                  Enviado
+                </td>
+                <td>
+                  <button
+                    class="btn btn-green"
+                    (click)="confirmOrderDispatch(order.id)"
+                  >
+                    <i class="fa fa-check" style="margin-right: 10px"></i>
+                    Confirmar Envio
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- END TABLE NO PADDING -->
+    </div>
+  </div>
+</div>

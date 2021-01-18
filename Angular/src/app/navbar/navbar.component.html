@@ -1,0 +1,131 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="brand" style="height: 50px; padding-top: 10px">
+    <a [routerLink]="['/']"
+      ><img
+        src="../../assets/img/logo-nav.png"
+        alt="Klorofil Logo"
+        class="img-responsive logo"
+    /></a>
+  </div>
+  <div class="container-fluid">
+    <div class="navbar-btn navbar-btn-right" *ngIf="!userLoggedIn()">
+      <a
+        class="btn btn-primary update-pro"
+        style="margin-right: 10px"
+        [routerLink]="['/sign-up']"
+        ><span>CRIAR CONTA</span></a
+      >
+      <a class="btn btn-success update-pro" [routerLink]="['/login']"
+        ><span>LOGIN</span></a
+      >
+    </div>
+    <div id="navbar-menu">
+      <ul class="nav navbar-nav navbar-right" style="margin-right: 10px">
+        <li class="dropdown" *ngIf="user.role !== 'ADMIN'">
+          <a
+            id="ola"
+            class="dropdown-toggle icon-menu"
+            data-toggle="dropdown"
+            style="cursor: pointer"
+          >
+            <i class="lnr lnr-cart"></i>
+            <span class="badge bg-danger" *ngIf="cart.items.length > 0">{{
+              cart.items.length
+            }}</span>
+          </a>
+          <ul class="dropdown-menu notifications" *ngIf="cart.items.length > 0">
+            <li class="notification-item" *ngFor="let item of cart.items">
+              <img class="img" [src]="item.book.image" />
+              <div class="item-info">
+                <h4>
+                  {{ item.book.title }}
+                  <span *ngIf="item.quantity > 1">({{ item.quantity }})</span>
+                </h4>
+                <h4>{{ item.book.price }}€</h4>
+              </div>
+            </li>
+            <li
+              class="text-center"
+              style="color: black"
+              *ngIf="cart.items.length > 0"
+            >
+              <h4>
+                Total:<span
+                  style="float: right; margin-right: 15px; font-weight: bold"
+                  >{{ cart.total }}€</span
+                >
+              </h4>
+            </li>
+            <li class="notification-item" *ngIf="cart.items.length > 0">
+              <button class="btn btn-green" (click)="checkout()">
+                CHECKOUT
+              </button>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown" *ngIf="userLoggedIn()">
+          <a
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            style="cursor: pointer"
+            ><span>{{ user.name }}</span>
+            <i class="icon-submenu lnr lnr-chevron-down"></i
+          ></a>
+          <ul class="dropdown-menu" *ngIf="user.role === 'USER'">
+            <li>
+              <a style="cursor: pointer"
+                ><i class="lnr lnr-user"></i> <span>Meu perfil</span></a
+              >
+            </li>
+            <li>
+              <a style="cursor: pointer" [routerLink]="['/orders']"
+                ><i class="lnr lnr-book"></i> <span>Encomendas</span></a
+              >
+            </li>
+            <li (click)="logout()">
+              <a style="font-size: 1.1em; cursor: pointer"
+                ><i class="lnr lnr-exit"></i> <span>Sair</span></a
+              >
+            </li>
+          </ul>
+          <ul class="dropdown-menu" *ngIf="user.role === 'ADMIN'">
+            <li>
+              <a style="cursor: pointer" [routerLink]="['/admin/manage-books']"
+                ><i class="lnr lnr-book"></i> <span>Gerir Livros</span></a
+              >
+            </li>
+            <li>
+              <a style="cursor: pointer" [routerLink]="['/admin/manage-orders']"
+                ><i class="lnr lnr-exit-up"></i>
+                <span>Gerir Encomendas</span></a
+              >
+            </li>
+            <li (click)="logout()">
+              <a style="font-size: 1.1em; cursor: pointer"
+                ><i class="lnr lnr-exit"></i> <span>Sair</span></a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <form class="navbar-form text-center">
+      <div class="input-group">
+        <input
+          type="text"
+          value=""
+          class="form-control"
+          placeholder="Procurar livro"
+          style="min-width: 450px"
+          [(ngModel)]="bookTitle"
+          [ngModelOptions]="{ standalone: true }"
+          (keypress)="onKeyPress($event)"
+        />
+        <span class="input-group-btn"
+          ><button type="button" class="btn btn-primary" (click)="searchBook()">
+            <i class="fa fa-search"></i></button
+        ></span>
+      </div>
+    </form>
+  </div>
+</nav>
